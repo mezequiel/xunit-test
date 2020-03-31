@@ -12,6 +12,9 @@ using Xunit;
 
 namespace EjemploPruebasUnitariasXUnit
 {
+    /// <summary>
+    /// Pruebas unitarias del controlador 'PaisController'
+    /// </summary>
     public partial class PaisControllerTest
     {
 
