@@ -129,7 +129,7 @@ namespace EjemploPruebasUnitariasXUnit
         [InlineData("il")]
         [InlineData("IL")]
         [InlineData("iL")]
-        public async Task GetPorNombreAsync_DevuelveVariosPaises_Cuando_IndicaParteNombreEnMayuscOMinusc(string parteNombre)
+        public async Task GetPorNombreAsync_DevuelveVariosPaises_Cuando_IndicaParteNombre(string parteNombre)
         {
             // preparo
             var mockPaisesApi = new Mock<IApiPaises>();
@@ -194,7 +194,7 @@ namespace EjemploPruebasUnitariasXUnit
         [InlineData("A")]
         [InlineData("AB")]
         [InlineData("ABDE")]
-        public async Task GetLimitrofesPaisAsync_Devuelve400_SiCodPaisNoTiene3CarAlfab(string codPais3)
+        public async Task GetLimitrofesPaisAsync_Devuelve400_SiCodPaisNoTiene3Caracteres(string codPais3)
         {
             // preparo
             var mockPaisesApi = new Mock<IApiPaises>();
@@ -224,7 +224,7 @@ namespace EjemploPruebasUnitariasXUnit
         }
 
         [Fact]
-        public async Task GetLimitrofesPaisAsync_Devuelve404_SiNoEncuentraPaisCodMayuscOMinusc()
+        public async Task GetLimitrofesPaisAsync_Devuelve404_SiNoEncuentraPais()
         {
             // preparo
             var mockPaisesApi = new Mock<IApiPaises>();
