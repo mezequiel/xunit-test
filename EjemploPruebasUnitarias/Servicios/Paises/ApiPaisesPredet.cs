@@ -14,28 +14,41 @@ namespace EjemploPruebasUnitarias.Servicios.Paises
     /// </summary>
     public class ApiPaisesPredet: IApiPaises
     {
-        HttpClient _httpClient = new HttpClient();
+
+        private IHttpClientFactory _httpFactory;
+
+        public ApiPaisesPredet(IHttpClientFactory httpFactory)
+        {
+            _httpFactory = httpFactory;
+        }
 
         public async Task<IList<PaisDto>> BuscarPaisesPorNombreAsync(string parteNombre)
         {
-            var jsonString = await _httpClient.GetStringAsync($"https://restcountries.eu/rest/v2/name/{parteNombre}");
-            var paises = JsonSerializer.Deserialize<List<PaisDto>>(jsonString);
-
-            return paises;
+            using (HttpClient httpclient = _httpFactory.CreateClient())
+            using (HttpResponseMessage response = await httpclient.GetAsync($"https://restcountries.eu/rest/v2/name/{parteNombre}"))
+            {
+                    var jsonString = await response.Content.ReadAsStringAsync();
+                    var paises = JsonSerializer.Deserialize<List<PaisDto>>(jsonString);
+                    return paises;
+            }
         }
 
         public async Task<IList<PaisDto>> BuscarPaisesPorCodigoAsync(string[] codigosPais)
         {
             var paramCodes = string.Join(";", codigosPais);
-            var jsonString = await _httpClient.GetStringAsync($"https://restcountries.eu/rest/v2/alpha?codes={paramCodes}");
-            var paises = JsonSerializer.Deserialize<List<PaisDto>>(jsonString);
 
-            return paises;
+            using (HttpClient httpclient = _httpFactory.CreateClient())
+            using (HttpResponseMessage response = await httpclient.GetAsync($"https://restcountries.eu/rest/v2/alpha?codes={paramCodes}"))
+            {
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var paises = JsonSerializer.Deserialize<List<PaisDto>>(jsonString).Where(x => x != null).ToList();
+                return paises;
+            }
         }
 
         public void Dispose()
         {
-            _httpClient.Dispose();
+            _httpFactory = null;
         }
     }
 }

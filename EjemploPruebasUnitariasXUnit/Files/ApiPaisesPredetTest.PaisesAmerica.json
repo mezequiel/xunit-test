@@ -1,0 +1,556 @@
+﻿[
+  {
+    "name": "Argentina",
+    "topLevelDomain": [
+      ".ar"
+    ],
+    "alpha2Code": "AR",
+    "alpha3Code": "ARG",
+    "callingCodes": [
+      "54"
+    ],
+    "capital": "Buenos Aires",
+    "altSpellings": [
+      "AR",
+      "Argentine Republic",
+      "República Argentina"
+    ],
+    "region": "Americas",
+    "subregion": "South America",
+    "population": 43590400,
+    "latlng": [
+      -34.0,
+      -64.0
+    ],
+    "demonym": "Argentinean",
+    "area": 2780400.0,
+    "gini": 44.5,
+    "timezones": [
+      "UTC-03:00"
+    ],
+    "borders": [
+      "BOL",
+      "BRA",
+      "CHL",
+      "PRY",
+      "URY"
+    ],
+    "nativeName": "Argentina",
+    "numericCode": "032",
+    "currencies": [
+      {
+        "code": "ARS",
+        "name": "Argentine peso",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      {
+        "iso639_1": "es",
+        "iso639_2": "spa",
+        "name": "Spanish",
+        "nativeName": "Español"
+      },
+      {
+        "iso639_1": "gn",
+        "iso639_2": "grn",
+        "name": "Guaraní",
+        "nativeName": "Avañe'ẽ"
+      }
+    ],
+    "translations": {
+      "de": "Argentinien",
+      "es": "Argentina",
+      "fr": "Argentine",
+      "ja": "アルゼンチン",
+      "it": "Argentina",
+      "br": "Argentina",
+      "pt": "Argentina",
+      "nl": "Argentinië",
+      "hr": "Argentina",
+      "fa": "آرژانتین"
+    },
+    "flag": "https://restcountries.eu/data/arg.svg",
+    "regionalBlocs": [
+      {
+        "acronym": "USAN",
+        "name": "Union of South American Nations",
+        "otherAcronyms": [
+          "UNASUR",
+          "UNASUL",
+          "UZAN"
+        ],
+        "otherNames": [
+          "Unión de Naciones Suramericanas",
+          "União de Nações Sul-Americanas",
+          "Unie van Zuid-Amerikaanse Naties",
+          "South American Union"
+        ]
+      }
+    ],
+    "cioc": "ARG"
+  },
+  {
+    "name": "Chile",
+    "topLevelDomain": [
+      ".cl"
+    ],
+    "alpha2Code": "CL",
+    "alpha3Code": "CHL",
+    "callingCodes": [
+      "56"
+    ],
+    "capital": "Santiago",
+    "altSpellings": [
+      "CL",
+      "Republic of Chile",
+      "República de Chile"
+    ],
+    "region": "Americas",
+    "subregion": "South America",
+    "population": 18191900,
+    "latlng": [
+      -30.0,
+      -71.0
+    ],
+    "demonym": "Chilean",
+    "area": 756102.0,
+    "gini": 52.1,
+    "timezones": [
+      "UTC-06:00",
+      "UTC-04:00"
+    ],
+    "borders": [
+      "ARG",
+      "BOL",
+      "PER"
+    ],
+    "nativeName": "Chile",
+    "numericCode": "152",
+    "currencies": [
+      {
+        "code": "CLP",
+        "name": "Chilean peso",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      {
+        "iso639_1": "es",
+        "iso639_2": "spa",
+        "name": "Spanish",
+        "nativeName": "Español"
+      }
+    ],
+    "translations": {
+      "de": "Chile",
+      "es": "Chile",
+      "fr": "Chili",
+      "ja": "チリ",
+      "it": "Cile",
+      "br": "Chile",
+      "pt": "Chile",
+      "nl": "Chili",
+      "hr": "Čile",
+      "fa": "شیلی"
+    },
+    "flag": "https://restcountries.eu/data/chl.svg",
+    "regionalBlocs": [
+      {
+        "acronym": "PA",
+        "name": "Pacific Alliance",
+        "otherAcronyms": [],
+        "otherNames": [
+          "Alianza del Pacífico"
+        ]
+      },
+      {
+        "acronym": "USAN",
+        "name": "Union of South American Nations",
+        "otherAcronyms": [
+          "UNASUR",
+          "UNASUL",
+          "UZAN"
+        ],
+        "otherNames": [
+          "Unión de Naciones Suramericanas",
+          "União de Nações Sul-Americanas",
+          "Unie van Zuid-Amerikaanse Naties",
+          "South American Union"
+        ]
+      }
+    ],
+    "cioc": "CHI"
+  },
+  {
+    "name": "Brazil",
+    "topLevelDomain": [
+      ".br"
+    ],
+    "alpha2Code": "BR",
+    "alpha3Code": "BRA",
+    "callingCodes": [
+      "55"
+    ],
+    "capital": "Brasília",
+    "altSpellings": [
+      "BR",
+      "Brasil",
+      "Federative Republic of Brazil",
+      "República Federativa do Brasil"
+    ],
+    "region": "Americas",
+    "subregion": "South America",
+    "population": 206135893,
+    "latlng": [
+      -10.0,
+      -55.0
+    ],
+    "demonym": "Brazilian",
+    "area": 8515767.0,
+    "gini": 54.7,
+    "timezones": [
+      "UTC-05:00",
+      "UTC-04:00",
+      "UTC-03:00",
+      "UTC-02:00"
+    ],
+    "borders": [
+      "ARG",
+      "BOL",
+      "COL",
+      "GUF",
+      "GUY",
+      "PRY",
+      "PER",
+      "SUR",
+      "URY",
+      "VEN"
+    ],
+    "nativeName": "Brasil",
+    "numericCode": "076",
+    "currencies": [
+      {
+        "code": "BRL",
+        "name": "Brazilian real",
+        "symbol": "R$"
+      }
+    ],
+    "languages": [
+      {
+        "iso639_1": "pt",
+        "iso639_2": "por",
+        "name": "Portuguese",
+        "nativeName": "Português"
+      }
+    ],
+    "translations": {
+      "de": "Brasilien",
+      "es": "Brasil",
+      "fr": "Brésil",
+      "ja": "ブラジル",
+      "it": "Brasile",
+      "br": "Brasil",
+      "pt": "Brasil",
+      "nl": "Brazilië",
+      "hr": "Brazil",
+      "fa": "برزیل"
+    },
+    "flag": "https://restcountries.eu/data/bra.svg",
+    "regionalBlocs": [
+      {
+        "acronym": "USAN",
+        "name": "Union of South American Nations",
+        "otherAcronyms": [
+          "UNASUR",
+          "UNASUL",
+          "UZAN"
+        ],
+        "otherNames": [
+          "Unión de Naciones Suramericanas",
+          "União de Nações Sul-Americanas",
+          "Unie van Zuid-Amerikaanse Naties",
+          "South American Union"
+        ]
+      }
+    ],
+    "cioc": "BRA"
+  },
+  {
+    "name": "Peru",
+    "topLevelDomain": [
+      ".pe"
+    ],
+    "alpha2Code": "PE",
+    "alpha3Code": "PER",
+    "callingCodes": [
+      "51"
+    ],
+    "capital": "Lima",
+    "altSpellings": [
+      "PE",
+      "Republic of Peru",
+      " República del Perú"
+    ],
+    "region": "Americas",
+    "subregion": "South America",
+    "population": 31488700,
+    "latlng": [
+      -10.0,
+      -76.0
+    ],
+    "demonym": "Peruvian",
+    "area": 1285216.0,
+    "gini": 48.1,
+    "timezones": [
+      "UTC-05:00"
+    ],
+    "borders": [
+      "BOL",
+      "BRA",
+      "CHL",
+      "COL",
+      "ECU"
+    ],
+    "nativeName": "Perú",
+    "numericCode": "604",
+    "currencies": [
+      {
+        "code": "PEN",
+        "name": "Peruvian sol",
+        "symbol": "S/."
+      }
+    ],
+    "languages": [
+      {
+        "iso639_1": "es",
+        "iso639_2": "spa",
+        "name": "Spanish",
+        "nativeName": "Español"
+      }
+    ],
+    "translations": {
+      "de": "Peru",
+      "es": "Perú",
+      "fr": "Pérou",
+      "ja": "ペルー",
+      "it": "Perù",
+      "br": "Peru",
+      "pt": "Peru",
+      "nl": "Peru",
+      "hr": "Peru",
+      "fa": "پرو"
+    },
+    "flag": "https://restcountries.eu/data/per.svg",
+    "regionalBlocs": [
+      {
+        "acronym": "PA",
+        "name": "Pacific Alliance",
+        "otherAcronyms": [],
+        "otherNames": [
+          "Alianza del Pacífico"
+        ]
+      },
+      {
+        "acronym": "USAN",
+        "name": "Union of South American Nations",
+        "otherAcronyms": [
+          "UNASUR",
+          "UNASUL",
+          "UZAN"
+        ],
+        "otherNames": [
+          "Unión de Naciones Suramericanas",
+          "União de Nações Sul-Americanas",
+          "Unie van Zuid-Amerikaanse Naties",
+          "South American Union"
+        ]
+      }
+    ],
+    "cioc": "PER"
+  },
+  {
+    "name": "Uruguay",
+    "topLevelDomain": [
+      ".uy"
+    ],
+    "alpha2Code": "UY",
+    "alpha3Code": "URY",
+    "callingCodes": [
+      "598"
+    ],
+    "capital": "Montevideo",
+    "altSpellings": [
+      "UY",
+      "Oriental Republic of Uruguay",
+      "República Oriental del Uruguay"
+    ],
+    "region": "Americas",
+    "subregion": "South America",
+    "population": 3480222,
+    "latlng": [
+      -33.0,
+      -56.0
+    ],
+    "demonym": "Uruguayan",
+    "area": 181034.0,
+    "gini": 39.7,
+    "timezones": [
+      "UTC-03:00"
+    ],
+    "borders": [
+      "ARG",
+      "BRA"
+    ],
+    "nativeName": "Uruguay",
+    "numericCode": "858",
+    "currencies": [
+      {
+        "code": "UYU",
+        "name": "Uruguayan peso",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      {
+        "iso639_1": "es",
+        "iso639_2": "spa",
+        "name": "Spanish",
+        "nativeName": "Español"
+      }
+    ],
+    "translations": {
+      "de": "Uruguay",
+      "es": "Uruguay",
+      "fr": "Uruguay",
+      "ja": "ウルグアイ",
+      "it": "Uruguay",
+      "br": "Uruguai",
+      "pt": "Uruguai",
+      "nl": "Uruguay",
+      "hr": "Urugvaj",
+      "fa": "اروگوئه"
+    },
+    "flag": "https://restcountries.eu/data/ury.svg",
+    "regionalBlocs": [
+      {
+        "acronym": "USAN",
+        "name": "Union of South American Nations",
+        "otherAcronyms": [
+          "UNASUR",
+          "UNASUL",
+          "UZAN"
+        ],
+        "otherNames": [
+          "Unión de Naciones Suramericanas",
+          "União de Nações Sul-Americanas",
+          "Unie van Zuid-Amerikaanse Naties",
+          "South American Union"
+        ]
+      }
+    ],
+    "cioc": "URU"
+  },
+  {
+    "name": "Bolivia (Plurinational State of)",
+    "topLevelDomain": [
+      ".bo"
+    ],
+    "alpha2Code": "BO",
+    "alpha3Code": "BOL",
+    "callingCodes": [
+      "591"
+    ],
+    "capital": "Sucre",
+    "altSpellings": [
+      "BO",
+      "Buliwya",
+      "Wuliwya",
+      "Plurinational State of Bolivia",
+      "Estado Plurinacional de Bolivia",
+      "Buliwya Mamallaqta",
+      "Wuliwya Suyu",
+      "Tetã Volívia"
+    ],
+    "region": "Americas",
+    "subregion": "South America",
+    "population": 10985059,
+    "latlng": [
+      -17.0,
+      -65.0
+    ],
+    "demonym": "Bolivian",
+    "area": 1098581.0,
+    "gini": 56.3,
+    "timezones": [
+      "UTC-04:00"
+    ],
+    "borders": [
+      "ARG",
+      "BRA",
+      "CHL",
+      "PRY",
+      "PER"
+    ],
+    "nativeName": "Bolivia",
+    "numericCode": "068",
+    "currencies": [
+      {
+        "code": "BOB",
+        "name": "Bolivian boliviano",
+        "symbol": "Bs."
+      }
+    ],
+    "languages": [
+      {
+        "iso639_1": "es",
+        "iso639_2": "spa",
+        "name": "Spanish",
+        "nativeName": "Español"
+      },
+      {
+        "iso639_1": "ay",
+        "iso639_2": "aym",
+        "name": "Aymara",
+        "nativeName": "aymar aru"
+      },
+      {
+        "iso639_1": "qu",
+        "iso639_2": "que",
+        "name": "Quechua",
+        "nativeName": "Runa Simi"
+      }
+    ],
+    "translations": {
+      "de": "Bolivien",
+      "es": "Bolivia",
+      "fr": "Bolivie",
+      "ja": "ボリビア多民族国",
+      "it": "Bolivia",
+      "br": "Bolívia",
+      "pt": "Bolívia",
+      "nl": "Bolivia",
+      "hr": "Bolivija",
+      "fa": "بولیوی"
+    },
+    "flag": "https://restcountries.eu/data/bol.svg",
+    "regionalBlocs": [
+      {
+        "acronym": "USAN",
+        "name": "Union of South American Nations",
+        "otherAcronyms": [
+          "UNASUR",
+          "UNASUL",
+          "UZAN"
+        ],
+        "otherNames": [
+          "Unión de Naciones Suramericanas",
+          "União de Nações Sul-Americanas",
+          "Unie van Zuid-Amerikaanse Naties",
+          "South American Union"
+        ]
+      }
+    ],
+    "cioc": "BOL"
+  }
+]

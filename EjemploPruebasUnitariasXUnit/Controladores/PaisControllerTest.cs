@@ -10,7 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace EjemploPruebasUnitariasXUnit
+namespace EjemploPruebasUnitariasXUnit.Controladores
 {
     /// <summary>
     /// Pruebas unitarias del controlador 'PaisController'

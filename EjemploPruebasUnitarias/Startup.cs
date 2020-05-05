@@ -30,6 +30,7 @@ namespace EjemploPruebasUnitarias
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddHttpClient();
             services.AddTransient<IApiPaises, ApiPaisesPredet>();
         }
 
