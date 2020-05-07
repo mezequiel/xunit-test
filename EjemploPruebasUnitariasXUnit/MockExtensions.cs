@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using Microsoft.Extensions.Logging;
+using Moq;
 using Moq.Language.Flow;
 using Moq.Protected;
 using System;
@@ -13,6 +14,17 @@ namespace EjemploPruebasUnitariasXUnit
 {
     public static class MockExtensions
     {
+        
+        public static ISetup<ILogger<TCategory>> SetupAnyLog<TCategory>(this Mock<ILogger<TCategory>> mock)
+        {
+            return mock.Setup(x => x.Log(
+                It.IsAny<LogLevel>(),
+                It.IsAny<EventId>(),
+                It.IsAny<It.IsAnyType>(),
+                It.IsAny<Exception>(),
+                (Func<It.IsAnyType, Exception, string>) It.IsAny<object>()));
+        }
+
         public static ISetup<HttpMessageHandler, HttpResponseMessage> SetupHttpMessage<TMocked>(this TMocked mock, string metodo = "SendAsync")
             where TMocked: Mock<HttpMessageHandler>
         {

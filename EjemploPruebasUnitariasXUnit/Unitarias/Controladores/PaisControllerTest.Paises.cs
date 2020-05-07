@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EjemploPruebasUnitariasXUnit.Controladores
+namespace EjemploPruebasUnitariasXUnit.Unitarias.Controladores
 {
     partial class PaisControllerTest
     {

@@ -14,15 +14,10 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Xunit;
-namespace EjemploPruebasUnitariasXUnit.Servicios
+namespace EjemploPruebasUnitariasXUnit.Unitarias.Servicios
 {
     public partial class ApiPaisesPredetTest
     {
-        // Paises en formato json recuperados desde archivo
-        static string _jsonPaisesAmerica = System.IO.File.ReadAllText(Path.Combine("Files", nameof(ApiPaisesPredetTest) + ".PaisesAmerica.json"));
-        static string _jsonPaisesOtros = System.IO.File.ReadAllText(Path.Combine("Files", nameof(ApiPaisesPredetTest) + ".PaisesOtros.json"));
-
-
 
         [Fact]
         public async Task BuscarPaisesPorCodigoAsync_DevuelveDTOsDePaisesConsultados()
@@ -31,7 +26,7 @@ namespace EjemploPruebasUnitariasXUnit.Servicios
             var paisesABuscar = new string[] { "ARG", "CHL", "PER", "URU", "BRA", "BOL" };
             var mockClientFactory = new Mock<IHttpClientFactory>();
             var mockHttpMessageHandler = new Mock<HttpMessageHandler>();
-            mockHttpMessageHandler.SetupAsyncHttpMessageAndResult(content: _jsonPaisesAmerica);
+            mockHttpMessageHandler.SetupAsyncHttpMessageAndResult(content: DatosTestApiPaises.JsonPaisesAmerica);
             
             var client = new HttpClient(mockHttpMessageHandler.Object);
             mockClientFactory.Setup(_ => _.CreateClient(It.IsAny<string>())).Returns(client);
