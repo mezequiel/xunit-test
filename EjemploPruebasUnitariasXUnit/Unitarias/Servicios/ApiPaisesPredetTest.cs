@@ -26,7 +26,7 @@ namespace EjemploPruebasUnitariasXUnit.Unitarias.Servicios
             var paisesABuscar = new string[] { "ARG", "CHL", "PER", "URU", "BRA", "BOL" };
             var mockClientFactory = new Mock<IHttpClientFactory>();
             var mockHttpMessageHandler = new Mock<HttpMessageHandler>();
-            mockHttpMessageHandler.SetupAsyncHttpMessageAndResult(content: DatosTestApiPaises.JsonPaisesAmerica);
+            mockHttpMessageHandler.SetupAsyncHttpMessageAndResult(content: DatosTestApiPaises.JsonAmerica);
             
             var client = new HttpClient(mockHttpMessageHandler.Object);
             mockClientFactory.Setup(_ => _.CreateClient(It.IsAny<string>())).Returns(client);

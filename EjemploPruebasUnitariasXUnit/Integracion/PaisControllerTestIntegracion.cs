@@ -26,18 +26,19 @@ using System.ComponentModel;
 namespace EjemploPruebasUnitariasXUnit.Integracion
 {
 
-    public partial class PaisControllerTestIntegracion : IClassFixture<TestWebApplicationFactory>
+    public partial class PaisControllerTestIntegracion : IClassFixture<TestWebApplicationFactory<MockConfigurationIntegrationTest>>
     {
         private readonly HttpClient _client;
-        private readonly TestWebApplicationFactory _factory;
+        private readonly TestWebApplicationFactory<MockConfigurationIntegrationTest> _factory;
 
         private readonly JsonSerializerOptions _jsonSettings = new JsonSerializerOptions() {
             PropertyNameCaseInsensitive = true
         };
         
-        public PaisControllerTestIntegracion(TestWebApplicationFactory factory)
+        public PaisControllerTestIntegracion(TestWebApplicationFactory<MockConfigurationIntegrationTest> factory)
         {
             _factory = factory;
+
             _client = factory.CreateClient(new WebApplicationFactoryClientOptions
             {
                 AllowAutoRedirect = false
@@ -72,6 +73,8 @@ namespace EjemploPruebasUnitariasXUnit.Integracion
             Assert.NotNull(unicoRdo);
             Assert.Equal(NOM_ESPERADO, unicoRdo.Nombre);
             Assert.Equal(HAB_ESPERADOS, unicoRdo.Poblacion);
+
+            var rdo = _factory.CreateClient().GetAsync("/pais/nombre/argentin").Result;
 
             _factory.MockApiPaises.Verify();
         }

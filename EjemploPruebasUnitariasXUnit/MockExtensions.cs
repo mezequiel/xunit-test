@@ -59,7 +59,7 @@ namespace EjemploPruebasUnitariasXUnit
             var returns = setup.ReturnsAsync(new HttpResponseMessage
             {
                 StatusCode = status,
-                Content = new StringContent(content)
+                Content = new StringContent(content ?? "")
             }); ;
             return returns;
         }
