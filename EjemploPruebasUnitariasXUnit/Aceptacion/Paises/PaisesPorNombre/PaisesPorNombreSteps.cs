@@ -1,4 +1,5 @@
 ﻿using EjemploPruebasUnitarias.Dtos;
+using EjemploPruebasUnitariasXUnit.Configuracion;
 using EjemploPruebasUnitariasXUnit.Integracion;
 using Microsoft.AspNetCore.Http;
 using Moq;
@@ -16,7 +17,7 @@ namespace EjemploPruebasUnitariasXUnit.Aceptacion.Paises.PaisesPorNombre
     [Binding]
     public class PaisesPorNombreSteps: PaisesStepsBase
     {
-        public PaisesPorNombreSteps(ScenarioContext scenarioContext, TestWebApplicationFactory<MockConfigurationAcceptanceTest> app): base(scenarioContext, app)
+        public PaisesPorNombreSteps(ScenarioContext scenarioContext, TestWebApplicationConfigFixture config): base(scenarioContext, config)
         {
         }
     }

@@ -1,4 +1,5 @@
 ﻿using EjemploPruebasUnitarias.Dtos;
+using Microsoft.Extensions.Configuration;
 using Serilog.Formatting.Json;
 using System;
 using System.Collections.Generic;
@@ -17,16 +18,20 @@ namespace EjemploPruebasUnitarias.Servicios.Paises
     {
 
         private IHttpClientFactory _httpFactory;
+        IConfiguration _configuration;
 
-        public ApiPaisesPredet(IHttpClientFactory httpFactory)
+        public ApiPaisesPredet(IHttpClientFactory httpFactory, IConfiguration configuration)
         {
             _httpFactory = httpFactory;
+            _configuration = configuration;
         }
 
         public async Task<IList<PaisDto>> BuscarPaisesPorNombreAsync(string parteNombre)
         {
+            var baseUrl = _configuration.GetValue<string>("Api:Paises:UrlBase");
+
             using (HttpClient httpclient = _httpFactory.CreateClient())
-            using (HttpResponseMessage response = await httpclient.GetAsync($"https://restcountries.eu/rest/v2/name/{parteNombre}"))
+            using (HttpResponseMessage response = await httpclient.GetAsync($"{baseUrl}/name/{parteNombre}"))
             {
                     var jsonString = await response.Content.ReadAsStringAsync();
                     var paises = JsonSerializer.Deserialize<List<PaisDto>>(jsonString);
@@ -38,8 +43,9 @@ namespace EjemploPruebasUnitarias.Servicios.Paises
         {
             var paramCodes = string.Join(";", codigosPais);
 
+            var baseUrl = _configuration.GetValue<string>("Api:Paises:UrlBase");
             using (HttpClient httpclient = _httpFactory.CreateClient())
-            using (HttpResponseMessage response = await httpclient.GetAsync($"https://restcountries.eu/rest/v2/alpha?codes={paramCodes}"))
+            using (HttpResponseMessage response = await httpclient.GetAsync($"{baseUrl}/alpha?codes={paramCodes}"))
             {
                 var jsonString = await response.Content.ReadAsStringAsync();
                 var paises = JsonSerializer.Deserialize<List<PaisDto>>(jsonString).Where(x => x != null).ToList();

@@ -22,27 +22,33 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using System.Text.Json;
 using System.ComponentModel;
+using WireMock.Matchers.Request;
+using WireMock.RequestBuilders;
+using WireMock.ResponseBuilders;
+using System.Threading;
+using EjemploPruebasUnitariasXUnit.Configuracion;
+using WireMock.Server;
+using WireMock;
 
 namespace EjemploPruebasUnitariasXUnit.Integracion
 {
 
-    public partial class PaisControllerTestIntegracion : IClassFixture<TestWebApplicationFactory<MockConfigurationIntegrationTest>>
+    [Collection("Global Fixtures")]
+    public partial class PaisControllerTestIntegracion : IClassFixture<TestWebApplicationConfigFixture>, IDisposable
     {
-        private readonly HttpClient _client;
-        private readonly TestWebApplicationFactory<MockConfigurationIntegrationTest> _factory;
-
+        private readonly TestWebApplicationConfigFixture _mockConfig;
         private readonly JsonSerializerOptions _jsonSettings = new JsonSerializerOptions() {
             PropertyNameCaseInsensitive = true
         };
-        
-        public PaisControllerTestIntegracion(TestWebApplicationFactory<MockConfigurationIntegrationTest> factory)
-        {
-            _factory = factory;
+        private Mock<ILogger<PaisController>> _paisesLogger;
+        private Mock<IApiPaises> _apiPaises;
+        private WireMockServer _apiServer;
+        private TestWebApplicationFactoryFixture _factory;
+        private HttpClient _client;
 
-            _client = factory.CreateClient(new WebApplicationFactoryClientOptions
-            {
-                AllowAutoRedirect = false
-            });
+        public PaisControllerTestIntegracion(TestWebApplicationConfigFixture mockConfig)
+        {
+            _mockConfig = mockConfig;
         }
 
 
@@ -54,14 +60,27 @@ namespace EjemploPruebasUnitariasXUnit.Integracion
             const string NOM_ESPERADO = "Argentina";
             const int HAB_ESPERADOS = 4700001;
 
-            _factory.MockApiPaises.Setup(s => 
-                    s.BuscarPaisesPorNombreAsync(BUSQUEDA))
-                        .ReturnsAsync(new PaisDto[] { new PaisDto() { Nombre = NOM_ESPERADO, Poblacion = HAB_ESPERADOS } })
-                        .Verifiable();
+            _paisesLogger = _mockConfig.MockearPaisesControllerLoggerMock();
+            _apiServer = _mockConfig.MockearPaisesApiServerMock();
+            _apiServer.Given(Request.Create()
+                                                .WithPath($"/name/{BUSQUEDA}")
+                                                .UsingGet())
+                                        .RespondWith(Response.Create()
+                                                                .WithSuccess()
+                                                                .WithBody(JsonSerializer.Serialize(new PaisDto[] { new PaisDto { Nombre = NOM_ESPERADO, Poblacion = HAB_ESPERADOS }}))
+                                                                .WithHeader("Content-Type", "application/json;charset=utf-8")
+                                                                );
 
+            _factory = _mockConfig.Create();
+            _client = _factory.CreateClient(new WebApplicationFactoryClientOptions
+            {
+                AllowAutoRedirect = false
+            });
+
+            //while (true)
+            //    Thread.Sleep(1000);
             // Act
             var response = await _client.GetAsync($"/pais/nombre/{BUSQUEDA}");
-
             // Assert
             var respCode = response.StatusCode;
             var json = await response.Content.ReadAsStringAsync();
@@ -74,9 +93,11 @@ namespace EjemploPruebasUnitariasXUnit.Integracion
             Assert.Equal(NOM_ESPERADO, unicoRdo.Nombre);
             Assert.Equal(HAB_ESPERADOS, unicoRdo.Poblacion);
 
-            var rdo = _factory.CreateClient().GetAsync("/pais/nombre/argentin").Result;
+        }
 
-            _factory.MockApiPaises.Verify();
+        private void MockApiServer_LogEntriesChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         [Fact]
@@ -87,12 +108,20 @@ namespace EjemploPruebasUnitariasXUnit.Integracion
             const string CODIGO_VALIDACION = "E01";
             Func<string, bool> ALGUNA_DESC_ERROR = (string msj) => !string.IsNullOrWhiteSpace(msj);
 
-            _factory.MockApiPaises.Setup(s => 
+            _paisesLogger = _mockConfig.MockearPaisesControllerLoggerMock();
+            _apiPaises = _mockConfig.MockearApiPaises();
+            _factory = _mockConfig.Create();
+
+            _client = _factory.CreateClient(new WebApplicationFactoryClientOptions
+            {
+                AllowAutoRedirect = false
+            });
+            _apiPaises.Setup(s => 
                     s.BuscarPaisesPorNombreAsync("xxx"))
                         .ThrowsAsync(new Exception("Excepción de prueba"))
                         .Verifiable();
 
-            _factory.MockLoggerPaisesController.SetupAnyLog();
+            _paisesLogger.SetupAnyLog();
 
             // Act
             var response = await _client.GetAsync($"/pais/nombre/xxx");
@@ -107,9 +136,18 @@ namespace EjemploPruebasUnitariasXUnit.Integracion
             Assert.Equal(CODIGO_VALIDACION, validacion.Mensaje);
             Assert.True(ALGUNA_DESC_ERROR(validacion.Descripcion));
 
-            _factory.MockApiPaises.Verify();
-            _factory.MockLoggerPaisesController.VerifyAll();
+            _apiPaises.Verify();
+            _paisesLogger.VerifyAll();
  
-        }        
+        }
+
+        public void Dispose()
+        {
+            _client?.Dispose();
+            _factory?.Dispose();
+            _apiPaises = null;
+            _apiServer?.Dispose();
+            _paisesLogger = null;
+        }
     }
 }

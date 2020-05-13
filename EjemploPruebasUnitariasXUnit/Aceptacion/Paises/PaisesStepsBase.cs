@@ -1,4 +1,5 @@
-﻿using EjemploPruebasUnitariasXUnit.Integracion;
+﻿using EjemploPruebasUnitariasXUnit.Configuracion;
+using EjemploPruebasUnitariasXUnit.Integracion;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -12,16 +13,18 @@ namespace EjemploPruebasUnitariasXUnit.Aceptacion.Paises
 {
     public class PaisesStepsBase
     {
-        public TestWebApplicationFactory<MockConfigurationAcceptanceTest> App => (TestWebApplicationFactory<MockConfigurationAcceptanceTest>) this.Valores["app"];
+        public TestWebApplicationFactoryFixture App => (TestWebApplicationFactoryFixture) this.Valores["app"];
+        public TestWebApplicationConfigFixture Conf => (TestWebApplicationConfigFixture) this.Valores["conf"];
         public Dictionary<string, object> Valores { get; } = new Dictionary<string, object>();
         protected readonly ScenarioContext scenarioContext;
-        public PaisesStepsBase(ScenarioContext scenarioContext, TestWebApplicationFactory<MockConfigurationAcceptanceTest> app)
+        public PaisesStepsBase(ScenarioContext scenarioContext, TestWebApplicationConfigFixture config)
         {
             if (scenarioContext == null)
                 throw new ArgumentNullException("scenarioContext");
 
             this.scenarioContext = scenarioContext;
-            this.Valores.Add("app", app);
+            this.Valores.Add("conf", config);
+            this.Valores.Add("app", config.Create());
         }
 
 
@@ -43,18 +46,24 @@ namespace EjemploPruebasUnitariasXUnit.Aceptacion.Paises
         [Given(@"que la API de terceros devolvera el codigo (.*)")]
         public void DadoQueLaAPIDeTercerosDevuelveElCodigo(int codigo)
         {
-            App.MockHttpMessageHandler.SetupAsyncHttpMessageAndResult(status: (HttpStatusCode) codigo);
-            App.MockHttpClientFactory.Setup(f => f.CreateClient(It.IsAny<string>()))
-                                        .Returns(new System.Net.Http.HttpClient(App.MockHttpMessageHandler.Object))
+            var mockMessageHandler = Conf.CreateMockHttpMessageHandler();
+            mockMessageHandler.SetupAsyncHttpMessageAndResult(status: (HttpStatusCode) codigo);
+            var clienteFactory = Conf.MockearHttpClientFactoryMock();
+
+            clienteFactory.Setup(f => f.CreateClient(It.IsAny<string>()))
+                                        .Returns(new System.Net.Http.HttpClient(mockMessageHandler.Object))
                                         .Verifiable();
         }
 
         [Given(@"que la API de terceros devolvera el codigo (.*) y el json '(.*)'")]
         public void DadoQueLaAPIDeTercerosDevuelveElCodigoYElJson(int codigo, string json)
         {
-            App.MockHttpMessageHandler.SetupAsyncHttpMessageAndResult(status: (HttpStatusCode)codigo, content: json);
-            App.MockHttpClientFactory.Setup(f => f.CreateClient(It.IsAny<string>()))
-                                        .Returns(new System.Net.Http.HttpClient(App.MockHttpMessageHandler.Object))
+            var mockMessageHandler = Conf.CreateMockHttpMessageHandler();
+            mockMessageHandler.SetupAsyncHttpMessageAndResult(status: (HttpStatusCode)codigo, content: json);
+            
+            var clienteFactory = Conf.MockearHttpClientFactoryMock();
+            clienteFactory.Setup(f => f.CreateClient(It.IsAny<string>()))
+                                        .Returns(new System.Net.Http.HttpClient(mockMessageHandler.Object))
                                         .Verifiable();
         }
 

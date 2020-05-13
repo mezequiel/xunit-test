@@ -2,6 +2,7 @@
 using EjemploPruebasUnitarias.Dtos;
 using EjemploPruebasUnitarias.Servicios.Paises;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Moq.Protected;
@@ -16,9 +17,14 @@ using System.Threading.Tasks;
 using Xunit;
 namespace EjemploPruebasUnitariasXUnit.Unitarias.Servicios
 {
+    [Collection("Global Fixtures")]
     public partial class ApiPaisesPredetTest
     {
-
+        IConfiguration _configuration;
+        public ApiPaisesPredetTest(ConfigurationFixture configuration)
+        {
+            _configuration = configuration.Configuration;
+        }
         [Fact]
         public async Task BuscarPaisesPorCodigoAsync_DevuelveDTOsDePaisesConsultados()
         {
@@ -33,7 +39,7 @@ namespace EjemploPruebasUnitariasXUnit.Unitarias.Servicios
 
 
             // ejecuto
-            var servicio = new ApiPaisesPredet(mockClientFactory.Object);
+            var servicio = new ApiPaisesPredet(mockClientFactory.Object, _configuration);
             var respuesta = await servicio.BuscarPaisesPorCodigoAsync(paisesABuscar);
 
             // valido
@@ -59,7 +65,7 @@ namespace EjemploPruebasUnitariasXUnit.Unitarias.Servicios
 
 
             // ejecuto
-            var servicio = new ApiPaisesPredet(mockClientFactory.Object);
+            var servicio = new ApiPaisesPredet(mockClientFactory.Object, _configuration);
             var respuesta = await servicio.BuscarPaisesPorCodigoAsync(new[] { "XXX" });
 
             // valido
@@ -82,7 +88,7 @@ namespace EjemploPruebasUnitariasXUnit.Unitarias.Servicios
 
 
             // ejecuto
-            var servicio = new ApiPaisesPredet(mockClientFactory.Object);
+            var servicio = new ApiPaisesPredet(mockClientFactory.Object, _configuration);
             Func<Task<IList<PaisDto>>> ejecutar = async() => await servicio.BuscarPaisesPorCodigoAsync(new []{ "XXX"});
 
             // valido
