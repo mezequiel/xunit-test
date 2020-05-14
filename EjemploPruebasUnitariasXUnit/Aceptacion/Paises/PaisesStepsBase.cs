@@ -7,13 +7,15 @@ using System.Collections.Specialized;
 using System.Net;
 using System.Text;
 using TechTalk.SpecFlow;
+using WireMock.RequestBuilders;
+using WireMock.ResponseBuilders;
 using Xunit;
 
 namespace EjemploPruebasUnitariasXUnit.Aceptacion.Paises
 {
+    [Collection("Global Fixtures")]
     public class PaisesStepsBase
     {
-        public TestWebApplicationFactoryFixture App => (TestWebApplicationFactoryFixture) this.Valores["app"];
         public TestWebApplicationConfigFixture Conf => (TestWebApplicationConfigFixture) this.Valores["conf"];
         public Dictionary<string, object> Valores { get; } = new Dictionary<string, object>();
         protected readonly ScenarioContext scenarioContext;
@@ -24,7 +26,6 @@ namespace EjemploPruebasUnitariasXUnit.Aceptacion.Paises
 
             this.scenarioContext = scenarioContext;
             this.Valores.Add("conf", config);
-            this.Valores.Add("app", config.Create());
         }
 
 
@@ -35,7 +36,8 @@ namespace EjemploPruebasUnitariasXUnit.Aceptacion.Paises
             this.Valores["endpoint-codigo"] = null;
             this.Valores["endpoint-json"] = null;
 
-            using (var client = App.CreateClient())
+            var app = Conf.Create();
+            using (var client = app.CreateClient())
             {
                 var resp = client.GetAsync($"{endpoint}/{string.Join("/", new string[] { parametros })}".TrimEnd('/')).Result;
                 this.Valores["endpoint-codigo"] = (int) resp.StatusCode;
@@ -46,25 +48,25 @@ namespace EjemploPruebasUnitariasXUnit.Aceptacion.Paises
         [Given(@"que la API de terceros devolvera el codigo (.*)")]
         public void DadoQueLaAPIDeTercerosDevuelveElCodigo(int codigo)
         {
-            var mockMessageHandler = Conf.CreateMockHttpMessageHandler();
-            mockMessageHandler.SetupAsyncHttpMessageAndResult(status: (HttpStatusCode) codigo);
-            var clienteFactory = Conf.MockearHttpClientFactoryMock();
+            var apiTerceros = Conf.MockearPaisesApiServerMock();
 
-            clienteFactory.Setup(f => f.CreateClient(It.IsAny<string>()))
-                                        .Returns(new System.Net.Http.HttpClient(mockMessageHandler.Object))
-                                        .Verifiable();
+            apiTerceros.Given(Request.Create()
+                                                .WithPath("/*")
+                                                .UsingGet())
+                                        .RespondWith(Response.Create().WithStatusCode(codigo));
         }
 
         [Given(@"que la API de terceros devolvera el codigo (.*) y el json '(.*)'")]
         public void DadoQueLaAPIDeTercerosDevuelveElCodigoYElJson(int codigo, string json)
         {
-            var mockMessageHandler = Conf.CreateMockHttpMessageHandler();
-            mockMessageHandler.SetupAsyncHttpMessageAndResult(status: (HttpStatusCode)codigo, content: json);
-            
-            var clienteFactory = Conf.MockearHttpClientFactoryMock();
-            clienteFactory.Setup(f => f.CreateClient(It.IsAny<string>()))
-                                        .Returns(new System.Net.Http.HttpClient(mockMessageHandler.Object))
-                                        .Verifiable();
+            var apiTerceros = Conf.MockearPaisesApiServerMock();
+
+            apiTerceros.Given(Request.Create()
+                                                .WithPath("/*")
+                                                .UsingGet())
+                                        .RespondWith(Response.Create().WithStatusCode(codigo)
+                                                                        .WithBody(json)
+                                                                        .WithHeader("Content-Type", "application/json;charset=utf-8"));
         }
 
  

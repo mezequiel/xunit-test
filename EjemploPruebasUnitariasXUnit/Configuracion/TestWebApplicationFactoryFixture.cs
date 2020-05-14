@@ -15,6 +15,7 @@ using Newtonsoft.Json.Bson;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using WireMock.Server;
@@ -95,15 +96,8 @@ namespace EjemploPruebasUnitariasXUnit.Configuracion
 
         public virtual WireMockServer MockearPaisesApiServerMock()
         {
-
-            var baseUrl = this.ConfigurationFixture.Configuration.GetValue<string>("Api:Paises:UrlBase");
-
-            var mock = WireMockServer.Start(new WireMockServerSettings()
-            {
-                StartAdminInterface = true,
-                Urls = new string[] { baseUrl }
-            });
-
+            var mock = WireMockServer.Start();
+            this.ConfigurationFixture.Configuration["Api:Paises:UrlBase"] = mock.Urls.First();
             return mock;
         }
 
