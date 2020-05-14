@@ -34,7 +34,7 @@ namespace EjemploPruebasUnitariasXUnit.Integracion
 {
 
     [Collection("Global Fixtures")]
-    public partial class PaisControllerTestIntegracion : IClassFixture<TestWebApplicationConfigFixture>, IDisposable
+    public partial class PaisControllerTestIntegracion : IDisposable
     {
         private readonly TestWebApplicationConfigFixture _mockConfig;
         private readonly JsonSerializerOptions _jsonSettings = new JsonSerializerOptions() {
@@ -46,9 +46,9 @@ namespace EjemploPruebasUnitariasXUnit.Integracion
         private TestWebApplicationFactoryFixture _factory;
         private HttpClient _client;
 
-        public PaisControllerTestIntegracion(TestWebApplicationConfigFixture mockConfig)
+        public PaisControllerTestIntegracion(ConfigurationFixture configuration)
         {
-            _mockConfig = mockConfig;
+            _mockConfig = new TestWebApplicationConfigFixture(configuration);
         }
 
 
@@ -93,11 +93,6 @@ namespace EjemploPruebasUnitariasXUnit.Integracion
             Assert.Equal(NOM_ESPERADO, unicoRdo.Nombre);
             Assert.Equal(HAB_ESPERADOS, unicoRdo.Poblacion);
 
-        }
-
-        private void MockApiServer_LogEntriesChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         [Fact]
@@ -148,6 +143,7 @@ namespace EjemploPruebasUnitariasXUnit.Integracion
             _apiPaises = null;
             _apiServer?.Dispose();
             _paisesLogger = null;
+            _mockConfig?.Dispose();
         }
     }
 }

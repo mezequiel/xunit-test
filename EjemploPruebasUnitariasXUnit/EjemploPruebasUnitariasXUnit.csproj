@@ -46,9 +46,6 @@
   </ItemGroup>
 
   <ItemGroup>
-	  <Folder Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
     <_CopyItems Include="Files\*.*'" />
   </ItemGroup>
   <ItemGroup>

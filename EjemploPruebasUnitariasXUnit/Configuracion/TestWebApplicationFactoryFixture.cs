@@ -22,7 +22,7 @@ using WireMock.Settings;
 
 namespace EjemploPruebasUnitariasXUnit.Configuracion
 {
-    public class TestWebApplicationConfigFixture
+    public class TestWebApplicationConfigFixture: IDisposable
     {
         public readonly ConfigurationFixture ConfigurationFixture;
         internal IList<Func<TestWebApplicationConfigFixture, TestWebApplicationFactoryFixture, IHostBuilder, IHostBuilder>> OnCreateHostFn = new List<Func<TestWebApplicationConfigFixture, TestWebApplicationFactoryFixture, IHostBuilder, IHostBuilder>>();
@@ -125,6 +125,10 @@ namespace EjemploPruebasUnitariasXUnit.Configuracion
         {
             return new Mock<HttpMessageHandler>();
         }
+
+        public void Dispose()
+        {
+        }
     }
     public class TestWebApplicationFactoryFixture : WebApplicationFactory<Startup>
     {
@@ -170,6 +174,7 @@ namespace EjemploPruebasUnitariasXUnit.Configuracion
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
+            _config = null;
         }
     }
 }
