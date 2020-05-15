@@ -63,8 +63,7 @@ namespace EjemploPruebasUnitariasXUnit.Integracion
             _paisesLogger = _mockConfig.MockearPaisesControllerLoggerMock();
             _apiServer = _mockConfig.MockearPaisesApiServerMock();
             _apiServer.Given(Request.Create()
-                                                .WithPath($"/name/{BUSQUEDA}")
-                                                .UsingGet())
+                                        .WithPath($"/name/{BUSQUEDA}"))
                                         .RespondWith(Response.Create()
                                                                 .WithSuccess()
                                                                 .WithBody(JsonSerializer.Serialize(new PaisDto[] { new PaisDto { Nombre = NOM_ESPERADO, Poblacion = HAB_ESPERADOS }}))
@@ -92,7 +91,7 @@ namespace EjemploPruebasUnitariasXUnit.Integracion
             Assert.NotNull(unicoRdo);
             Assert.Equal(NOM_ESPERADO, unicoRdo.Nombre);
             Assert.Equal(HAB_ESPERADOS, unicoRdo.Poblacion);
-
+            Assert.True(_apiServer.VerifyAll());
         }
 
         [Fact]
