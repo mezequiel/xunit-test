@@ -17,6 +17,7 @@ using Serilog;
 
 namespace EjemploPruebasUnitarias
 {
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         public Startup(IConfiguration configuration)

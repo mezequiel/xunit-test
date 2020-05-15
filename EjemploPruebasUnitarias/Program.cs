@@ -13,6 +13,7 @@ using Serilog.Formatting.Compact;
 
 namespace EjemploPruebasUnitarias
 {
+    [ExcludeFromCodeCoverage]
     public class Program
     {
         public static void Main(string[] args)
